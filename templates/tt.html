@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block title %}
+    TimeTable
+{% endblock %}
+
+{% block ex %}
+    <br>
+    <h5>{{ day }}</h5>
+    <br>
+    <ul class="list-group">
+        {% for period in periods %}
+            <li class="list-group-item">{{ period }} </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

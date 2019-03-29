@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    TimeTable
+{% endblock %}
+
+{% block body %}
+    <br>
+    
+    <h1>Time Table</h1>
+    <p>IT 4th Sem</p>
+    <br>
+    <form action="{{ url_for('tt') }}" method="post">
+        <div class="form-group">
+            <select class="form-control" name="name">
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+                <option value="sat">Saturday</option>
+            </select>
+            <br>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+
+    {% block ex%}
+    
+    {% endblock %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
