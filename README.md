@@ -2,7 +2,7 @@
 
 This is a Simple Time Table Web App made to learn the basic concepts of Flask and Databases/SQL.
 
-[Working Prototype](srijan.mutech.xyz/timetable)
+[Working Prototype](http://srijan.mutech.xyz/timetable)
 
 
 
