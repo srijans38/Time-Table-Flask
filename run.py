@@ -103,6 +103,7 @@ def api(day):
         #If the day format is invalid Returning an error message.
         return jsonify(error="Invalid Day.")
 
+
 if __name__ == "__main__":
     app.run()
     
