@@ -60,7 +60,7 @@ def tt():
     
 
     #Dictionary with abbreviations.
-    #Used here the return the full name of the day.
+    #Used here to return the full name of the day.
     days_abbr = {
         'mon': 'Monday',
         'tue': 'Tuesday',
