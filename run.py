@@ -1,8 +1,6 @@
-"""
 
-A Flask app that displays a simple Time Table 
+# A Flask app that displays a simple Time Table 
 
-"""
 
 #Importing modules.
 import os
@@ -18,25 +16,25 @@ db = scoped_session(sessionmaker(bind=engine))
 app = Flask(__name__)
 
 #Index
-@app.route("/", methods=["GET"])
-"""
-Index route:
-    Shows a Select option to choose the day of the week.
-    And a submit button.
-    Submit Button sends a POST request to /tt with the option selected.
+# 
+# Index route:
+#     Shows a Select option to choose the day of the week.
+#     And a submit button.
+#     Submit Button sends a POST request to /tt with the option selected.
 
-"""
+# 
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
 
-@app.route("/tt", methods=["POST", "GET"])
-"""
-Time Table route:
-    Accepts both GET and POST requests.
-    Gets all the periods from the database and returns to tt.html(For POST)
-    Displays the index page(For GET)
+# """
+# Time Table route:
+#     Accepts both GET and POST requests.
+#     Gets all the periods from the database and returns to tt.html(For POST)
+#     Displays the index page(For GET)
 
-"""
+# """
+@app.route("/tt", methods=["POST", "GET"])
 def tt():
     
     #For GET request
@@ -48,6 +46,8 @@ def tt():
     
     #Getting the form from index.html
     name = request.form.get("name")
+
+    print(name)
 
     #Getting the periods from the database.
     periods = db.execute(f"SELECT {name} FROM it4").fetchall()
@@ -74,16 +74,18 @@ def tt():
     return render_template("tt.html", periods=strpd_periods, day=days_abbr[name])
 
 #API
-@app.route("/api/<string:day>")
-"""
-An API which returns the Time Table provided a day.
-Only the first three letters of the day have to be specified.
-For Monday:
-    /api/mon
-and vice versa.
+# """
+# An API which returns the Time Table provided a day.
+# Only the first three letters of the day have to be specified.
+# For Monday:
+#     /api/mon
+# and vice versa.
 
-"""
-def api(day):
+# """
+@app.route("/api", methods=["GET", "POST"])
+def api():
+
+    day = request.args.get('day')
     #List of days on which classes are held.
     days_active = ['mon','tue','wed','thu','fri','sat']
     #Checking if there are classes on the specified day.
@@ -97,11 +99,12 @@ def api(day):
             strpd_periods.append(str(period).strip("()',"))
 
         #Returning a JSON objects with a list of classes for the specified day.
-        return jsonify(periods=strpd_periods)
+        return jsonify(periods=strpd_periods, method=request.method)
 
     else:
         #If the day format is invalid Returning an error message.
-        return jsonify(error="Invalid Day.")
+        return jsonify(error="Invalid Day.", method=request.method)
+
 
 
 if __name__ == "__main__":
