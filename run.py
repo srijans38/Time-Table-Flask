@@ -105,6 +105,10 @@ def api():
         #If the day format is invalid Returning an error message.
         return jsonify(error="Invalid Day.", method=request.method)
 
+   
+@app.route("/hello")
+def hello():
+    return "Hello World!"
 
 
 if __name__ == "__main__":
